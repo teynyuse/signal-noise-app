@@ -1,0 +1,16 @@
+LOOK AGAIN V3 — INSTALL IN YOUR EXISTING NEXT.JS PROJECT
+
+1. Download look-again-v3.zip to Downloads.
+2. In Visual Studio Code open your existing Next.js folder, where package.json is.
+3. Open a terminal and run:
+
+unzip -o ~/Downloads/look-again-v3.zip -d .
+npm run dev
+
+4. Open http://localhost:3000
+5. Check with:
+
+npx tsc --noEmit
+npm run build
+
+This does NOT replace package.json or dependencies. No npm install is required.

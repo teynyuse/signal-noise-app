@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LOOK AGAIN. — Interactive introduction for UUG.AI
 
-## Getting Started
+An original, illustrated and scrollable one-page creative application by **Teynur Yuseinov** for UUG.AI's Creative Frontend Engineer role and Arteveldehogeschool's LYOB Job Battle.
 
-First, run the development server:
+**Idea:** A detection is not a story. A fictional eight-frame vignette of a lost red balloon becomes a human moment when the visitor scrubs time and changes perspective. The page is not meant to reproduce UUG.AI's real interface or data.
+
+## Install over your existing Next.js project
+
+From your **existing Next.js project's root** (the directory containing `package.json`):
 
 ```bash
+unzip -o ~/Downloads/look-again-v3.zip -d .
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. The archive contains only `src/` and documentation, **not** package.json or node_modules. No new dependencies are needed for this version.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Check it:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx tsc --noEmit
+npm run build
+```
 
-## Learn More
+## What is interactive?
 
-To learn more about Next.js, take a look at the following resources:
+1. **Eight-frame illustrated story:** drag the native range slider (works with pointer, touch and keyboard), press play/pause or move to the next frame. Figures and the red balloon transition between moments.
+2. **Switch lens:** toggles between a deliberately limited technical description and the story in human terms, while preserving the selected frame.
+3. **Three design principles:** select audience, function or feeling; the typographic art and explanation change together.
+4. **Fossielenspoor iteration:** switch Before/After to compare a schematic of an early, unstable construction with a reinforcing exterior shell. This is **an illustration of the decision**, not a project photograph.
+5. **Normal scrolling:** anchor navigation and reading order work without scroll-jacking, locked screens or hidden steps.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Who it is for
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The original 30 September 2026 UUG.AI role asks for someone who can make video, timelines, AI output and complex information understandable. This prototype expresses an independent design perspective on that general challenge; it is not based on their actual video AI models.
 
-## Deploy on Vercel
+## Files
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `src/components/LookAgain.tsx`: whole application, illustrated React SVG scene and working interactions.
+- `src/lib/story.ts`: eight original frames and design-principle content.
+- `src/app/globals.css`: art direction, interactions, layout, animations and reduced-motion handling.
+- `src/app/page.tsx`, `layout.tsx`, `icon.svg`: entrypoint and metadata.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Hand-in at LYOB
+
+The Job Battle course specifies an **embedded file on Notion** (PDF, MP4 or image) by **18 November 2026 at 23:55**. Publish the site on Vercel and embed a short MP4 tour or screenshot PDF in Notion, in addition to adding the public URL. A public link alone is not an embedded file.
+
+## Notes
+
+- The story and all detection text are fictional. No cameras, AI, analytics, network requests, personal tracking or database are used.
+- The project is independently made and is **not affiliated with or endorsed by UUG.AI**.
+- No actual imagery from Het Fossielenspoor is included. Add real project images only if you own them and want to personalize the page further.
+- Test mobile, Safari and reduced-motion mode before submitting.

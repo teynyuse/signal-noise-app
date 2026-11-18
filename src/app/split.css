@@ -1,0 +1,6 @@
+.split-line { position: absolute; z-index: 4; top: 0; bottom: 0; left: var(--split); width: 2px; background: var(--acid); pointer-events: none; }
+.split-line span { position: absolute; top: 50%; left: 50%; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; transform: translate(-50%,-50%); background: var(--acid); color: var(--ink); border: 2px solid var(--ink); font-size: 25px; transition: transform .2s; }
+.split-control { appearance: none; position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; margin: 0; background: transparent; cursor: ew-resize; opacity: .001; }
+.split-control:focus-visible { opacity: 1; outline: 0; background: linear-gradient(transparent calc(50% - 2px), var(--orange) calc(50% - 2px), var(--orange) calc(50% + 2px), transparent calc(50% + 2px)); }
+.split-control:focus-visible::-webkit-slider-thumb { appearance: none; width: 60px; height: 60px; border: 4px solid var(--orange); border-radius: 50%; background: transparent; }
+.reveal-stage:hover .split-line span { transform: translate(-50%,-50%) scale(1.1); }
