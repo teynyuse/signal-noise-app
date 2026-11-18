@@ -1,53 +1,114 @@
-# LOOK AGAIN. — Interactive introduction for UUG.AI
+# Look Again — The Missing Link
 
-An original, illustrated and scrollable one-page creative application by **Teynur Yuseinov** for UUG.AI's Creative Frontend Engineer role and Arteveldehogeschool's LYOB Job Battle.
+**An interactive application for the Node.js Back-End Engineer role at In The Pocket.**
 
-**Idea:** A detection is not a story. A fictional eight-frame vignette of a lost red balloon becomes a human moment when the visitor scrubs time and changes perspective. The page is not meant to reproduce UUG.AI's real interface or data.
+Created by [Teynur Yuseinov](https://www.teynuryuseinov.be/en) as part of Arteveldehogeschool's LYOB Job Battle.
 
-## Install over your existing Next.js project
+## The idea
 
-From your **existing Next.js project's root** (the directory containing `package.json`):
+**You see movement. But do you see the system?**
+
+A digital experience shows people what happens. A reliable backend makes sure the underlying events, state changes and responses make sense.
+
+*Look Again* explores that distinction through a fictional story: a child loses a red balloon, a passer-by notices and returns it. As visitors scroll, they see the same sequence through two perspectives — what a system might observe and what the moment means to a person.
+
+This is a **frontend storytelling prototype communicating my backend engineering approach**, not a deployed backend service or a real AI detection system. The event names, statuses and technical outputs in the story are illustrative.
+
+## Explore the experience
+
+- **Scroll-driven narrative:** four chapters — holding, losing, noticing and returning — unfold as the visitor scrolls.
+- **Two perspectives:** an illustrated comparison contrasts a technical observation with the human story behind it.
+- **Continuous visual thread:** the red balloon follows the page journey, connecting its different sections.
+- **Backend thinking:** subsequent sections introduce domain modelling, secure and testable services, API contracts, data and security, and delivery.
+- **Project example:** *Het Fossielenspoor* illustrates how physical input, system state and feedback connect in a real interactive installation.
+- **Bilingual content:** switch between English and Dutch.
+- **Motion accessibility:** animations take the user's reduced-motion preference into account.
+
+## Why In The Pocket?
+
+Rather than writing a conventional cover letter, I wanted to make my way of thinking tangible. The experience connects a human story to engineering questions:
+
+- Which event occurred, and what state should change?
+- How do we keep data, API responses and error handling predictable?
+- How can services remain secure, testable, observable and maintainable?
+
+These are **themes explored by the presentation**; the project does not claim to implement the API, authentication, database, Docker pipeline or cloud infrastructure mentioned in its content.
+
+## Built with
+
+| Technology | Role |
+| --- | --- |
+| Next.js 16 (App Router) | Application framework |
+| React 19 + TypeScript | Component architecture and type safety |
+| Motion | Scroll-linked animation and scene transitions |
+| CSS | Layout, visual design and responsive styling |
+| Next.js Image | Project image rendering |
+
+The project also lists `lucide-react`, Tailwind CSS and its Turbopack integration as dependencies. The active experience is implemented in `src/components/LookAgain.tsx`.
+
+## Run locally
+
+### Requirements
+
+- Node.js and npm compatible with the installed Next.js version
+
+### Setup
 
 ```bash
-unzip -o ~/Downloads/look-again-v3.zip -d .
-npm run dev
+ git clone https://github.com/teynyuse/signal-noise-app.git
+ cd signal-noise-app
+ npm ci
+ npm run dev
 ```
 
-Open http://localhost:3000. The archive contains only `src/` and documentation, **not** package.json or node_modules. No new dependencies are needed for this version.
+Visit [http://localhost:3000](http://localhost:3000).
 
-Check it:
+### Checks
 
 ```bash
 npx tsc --noEmit
+npm run lint
 npm run build
 ```
 
-## What is interactive?
+To run the production build locally:
 
-1. **Eight-frame illustrated story:** drag the native range slider (works with pointer, touch and keyboard), press play/pause or move to the next frame. Figures and the red balloon transition between moments.
-2. **Switch lens:** toggles between a deliberately limited technical description and the story in human terms, while preserving the selected frame.
-3. **Three design principles:** select audience, function or feeling; the typographic art and explanation change together.
-4. **Fossielenspoor iteration:** switch Before/After to compare a schematic of an early, unstable construction with a reinforcing exterior shell. This is **an illustration of the decision**, not a project photograph.
-5. **Normal scrolling:** anchor navigation and reading order work without scroll-jacking, locked screens or hidden steps.
+```bash
+npm run start
+```
 
-## Who it is for
+**Required image:** `src/components/LookAgain.tsx` references `/fossielenspoor.jpg`. Ensure `public/fossielenspoor.jpg` is present; it was not included in the supplied project snapshot.
 
-The original 30 September 2026 UUG.AI role asks for someone who can make video, timelines, AI output and complex information understandable. This prototype expresses an independent design perspective on that general challenge; it is not based on their actual video AI models.
+## Project structure
 
-## Files
+```text
+src/
+├── app/
+│   ├── globals.css        # Main styles and responsive design
+│   ├── layout.tsx         # Page metadata and root layout
+│   ├── page.tsx           # Renders LookAgain
+│   └── split.css          # Comparison interaction styles
+├── components/
+│   └── LookAgain.tsx      # Current interactive experience
+└── lib/
+    └── story.ts          # Earlier eight-frame story data
+```
 
-- `src/components/LookAgain.tsx`: whole application, illustrated React SVG scene and working interactions.
-- `src/lib/story.ts`: eight original frames and design-principle content.
-- `src/app/globals.css`: art direction, interactions, layout, animations and reduced-motion handling.
-- `src/app/page.tsx`, `layout.tsx`, `icon.svg`: entrypoint and metadata.
+The repository also contains `src/components/SignalNoise.tsx`, `src/lib/mock-events.ts` and a `src.backup/` directory from earlier iterations. They are **not the current page entry point**.
 
-## Hand-in at LYOB
+## Project status and limitations
 
-The Job Battle course specifies an **embedded file on Notion** (PDF, MP4 or image) by **18 November 2026 at 23:55**. Publish the site on Vercel and embed a short MP4 tour or screenshot PDF in Notion, in addition to adding the public URL. A public link alone is not an embedded file.
+This is a concept and portfolio demonstration built around an illustrated, fictional scenario. It does not connect to cameras, external AI models, real event streams, a database or live backend APIs. Labels such as `200 · persisted` and `200 · idempotent` are narrative examples, not measured runtime results.
 
-## Notes
+The current frontend is a demonstration of engineering interests and communication, rather than proof of implemented production backend infrastructure.
 
-- The story and all detection text are fictional. No cameras, AI, analytics, network requests, personal tracking or database are used.
-- The project is independently made and is **not affiliated with or endorsed by UUG.AI**.
-- No actual imagery from Het Fossielenspoor is included. Add real project images only if you own them and want to personalize the page further.
-- Test mobile, Safari and reduced-motion mode before submitting.
+## About
+
+**Teynur Yuseinov** — interactive developer with an interest in connecting clear interfaces to dependable systems.
+
+- [Portfolio](https://www.teynuryuseinov.be/en)
+- [Het Fossielenspoor](https://www.teynuryuseinov.be/en/work/het-fossielenspoor)
+
+---
+
+*Independent creative application for In The Pocket's Node.js Back-End Engineer role. Not an official In The Pocket product or affiliated project.*
