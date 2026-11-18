@@ -64,9 +64,9 @@ function Balloon({ x = 0, y = 0, string = 100, opacity = 1 }: { x?: number; y?: 
   const reduced = useReducedMotion();
   return <motion.g initial={false} animate={{ x, y, opacity }} transition={{ duration: reduced ? 0 : 1.4, ease }}>
     <path d={`M0 40 C20 65 -14 ${string - 20} 0 ${string}`} fill="none" stroke="currentColor" strokeWidth="1.6" />
-    <path d="M0-45C-54-45-50 23 0 44C50 23 54-45 0-45Z" fill="#d90429" />
-    <path d="m0 41-5 8h10Z" fill="#d90429" />
-    <path d="M-19-26q-13 13-9 28" stroke="#ffacba" strokeWidth="4" fill="none" strokeLinecap="round" />
+    <path d="M0-45C-54-45-50 23 0 44C50 23 54-45 0-45Z" fill="#594ba0" />
+    <path d="m0 41-5 8h10Z" fill="#594ba0" />
+    <path d="M-19-26q-13 13-9 28" stroke="#c9c1ee" strokeWidth="4" fill="none" strokeLinecap="round" />
   </motion.g>;
 }
 
@@ -114,7 +114,7 @@ function Scene({ beat, human }: { beat: number; human: boolean }) {
     </g></> : <>
       <g stroke="#a699cf" fill="none"><rect x="209" y="213" width="65" height="159" /><path d="M240 231v118m-23-76h46m-23 76-17 20m17-20 17 20" /></g>
       <motion.g animate={{x:helper}} transition={{duration:reduced ? 0 : 1.4,ease}}><rect x="-31" y="213" width="65" height="159" stroke="#a699cf" fill="none" /><text x="-31" y="202">PERSON 02</text></motion.g>
-      <motion.g animate={{x:balloon.x,y:balloon.y}} transition={{duration:reduced ? 0 : 1.4,ease}}><rect x="-43" y="-52" width="86" height="107" stroke="#c5b5ed" fill="none" /><circle r="5" fill="#d90429" /><text x="-43" y="-63">OBJECT 01</text></motion.g>
+      <motion.g animate={{x:balloon.x,y:balloon.y}} transition={{duration:reduced ? 0 : 1.4,ease}}><rect x="-43" y="-52" width="86" height="107" stroke="#c5b5ed" fill="none" /><circle r="5" fill="#594ba0" /><text x="-43" y="-63">OBJECT 01</text></motion.g>
       <text x="209" y="202">PERSON 01</text><path d="M285 174 375 80 520 113 325 174" stroke="#84759c" strokeDasharray="3 6" fill="none" />
     </>}
   </svg>;
@@ -150,9 +150,12 @@ function Experiment({ c }: { c: Copy }) {
       <div className="story-sticky">
         <div className="comparison story-stage" aria-label={c.human}>
           <Scene beat={beat} human />
-          <div className="observation-card"><span>BACKEND EVENT STREAM · LIVE</span><motion.div className="tech-readout" key={beat} {...chapterEntrance(direction, reduced, 6)}><strong>{c.tech[beat].status}</strong><dl><div><dt>Event</dt><dd>{c.tech[beat].event}</dd></div><div><dt>State</dt><dd>{c.tech[beat].state}</dd></div><div><dt>Result</dt><dd>{c.tech[beat].result}</dd></div></dl></motion.div><div className="observation-scan" aria-hidden="true"><i /><i /><i /></div></div>
+          <div className="story-card unified-story-card" aria-live="polite">
+            <div className="story-card-step"><strong>{c.beats[beat]}</strong></div>
+            <motion.div className="story-card-copy" key={beat} {...chapterEntrance(direction, reduced, 8)}><small>{c.human}</small><p>{c.stories[beat]}</p></motion.div>
+            <div className="observation-card"><span>BACKEND EVENT STREAM · LIVE</span><motion.div className="tech-readout" key={`event-${beat}`} {...chapterEntrance(direction, reduced, 6)}><strong>{c.tech[beat].status}</strong><dl><div><dt>Event</dt><dd>{c.tech[beat].event}</dd></div><div><dt>State</dt><dd>{c.tech[beat].state}</dd></div><div><dt>Result</dt><dd>{c.tech[beat].result}</dd></div></dl></motion.div><div className="observation-scan" aria-hidden="true"><i /><i /><i /></div></div>
+          </div>
         </div>
-        <div className="story-card" aria-live="polite"><div className="story-card-step"><strong>{c.beats[beat]}</strong></div><motion.div className="story-card-copy" key={beat} {...chapterEntrance(direction, reduced, 8)}><small>{c.human}</small><p>{c.stories[beat]}</p></motion.div></div>
         <div className="scroll-timeline" aria-label={c.timeline}><div className="scroll-track"><motion.span style={{scaleX:progress}} /></div>{c.beats.map((label,i) => <span key={label} className={beat===i?'active':''}><i /> <span className="sr-only">{label}</span></span>)}</div>
       </div>
     </div>
@@ -214,6 +217,7 @@ function Fit({ c }: { c: Copy }) {
 
 export function LookAgain() {
   const [lang, setLang] = useState<Lang>('en');
+  const [heroFloat, setHeroFloat] = useState(true);
   const c = copy[lang];
   const reduced = useReducedMotion();
   const journey = useRef<HTMLDivElement>(null);
@@ -221,11 +225,12 @@ export function LookAgain() {
   const smoothJourney = useSpring(journeyProgress, { stiffness: 155, damping: 28, mass: .55 });
   const balloonProgress = reduced ? journeyProgress : smoothJourney;
   const keyframes = [0,.08,.15,.19,.22,.25,.4375,.58,.625,.76,.8125,.94,1];
-  const balloonX = useTransform(balloonProgress, keyframes, ['76vw','76vw','72vw','58vw','43vw','35.5vw','35.5vw','47vw','47vw','65vw','65vw','35.5vw','35.5vw']);
-  const balloonY = useTransform(balloonProgress, keyframes, ['51svh','45svh','25svh','14svh','25svh','42svh','42svh','19svh','19svh','26svh','26svh','42svh','42svh']);
+  const balloonX = useTransform(balloonProgress, keyframes, ['70vw','70vw','68vw','56vw','43vw','35.5vw','35.5vw','47vw','47vw','65vw','65vw','35.5vw','35.5vw']);
+  const balloonY = useTransform(balloonProgress, keyframes, ['45svh','40svh','23svh','14svh','25svh','42svh','42svh','19svh','19svh','26svh','26svh','42svh','42svh']);
   const balloonScale = useTransform(balloonProgress, [0,.08,.19,.25,.85,.94,1], [1.08,1.12,.96,.82,.82,.68,.68]);
   const balloonRotate = useTransform(balloonProgress, keyframes, [0,-2,-7,4,-3,0,0,-4,0,3,0,0,0]);
   const detectionOpacity = useTransform(balloonProgress, [0,.23,.27], [0,0,1]);
+  useMotionValueEvent(balloonProgress, 'change', latest => setHeroFloat(latest < .075));
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   return <>
     <a className="skip-link" href="#main">{c.skip}</a>
@@ -234,14 +239,16 @@ export function LookAgain() {
       <div className="journey-overlay" aria-hidden="true">
         <div className="journey-frame">
           <motion.div className="journey-balloon" style={{x:balloonX,y:balloonY,scale:balloonScale,rotate:reduced ? 0 : balloonRotate}}>
-            <motion.div className="journey-detection" style={{opacity:detectionOpacity}}><span>OBJECT_01 · 97%</span></motion.div>
-            <svg viewBox="-60 -60 120 285"><Balloon string={195} /></svg>
+            <div className={`journey-balloon-inner${heroFloat && !reduced?' is-floating':''}`}>
+              <motion.div className="journey-detection" style={{opacity:detectionOpacity}}><span>OBJECT_01 · 97%</span></motion.div>
+              <svg viewBox="-60 -60 120 285"><Balloon string={195} /></svg>
+            </div>
           </motion.div>
         </div>
       </div>
       <section id="top" className="hero section">
         <div className="hero-language-bar"><div className="hero-language language" role="group" aria-label={lang==='nl'?'Taal':'Language'}>{(['en','nl'] as const).map(l => <button key={l} type="button" lang={l} aria-label={l==='nl'?'Nederlands':'English'} aria-pressed={lang===l} onClick={() => setLang(l)}>{l.toUpperCase()}</button>)}</div></div>
-        <div className="hero-layout"><div className="hero-copy"><h1 key={lang}>{c.title.map((line,i) => <span className="title-mask" key={line}><motion.span initial={{y:reduced?0:'105%'}} animate={{y:0}} transition={{delay:i*.12,duration:.85,ease}} className={i===2?'accent':''}>{line}</motion.span></span>)}</h1><p>{c.lead}</p></div>
+        <div className="hero-layout"><div className="hero-copy"><h1 key={lang}>{c.title.map((line,i) => <span className="title-mask" key={line}><motion.span initial={{y:reduced?0:'105%'}} animate={{y:0}} transition={{delay:i*.12,duration:.85,ease}} className={i===2?'accent':''}>{line}</motion.span></span>)}</h1></div>
         <div className="hero-object" aria-hidden="true"><div className="orbit orbit-one" /><div className="orbit orbit-two" /></div></div>
         <a className="hero-scroll-cue" href="#experience" aria-label={lang==='nl'?'Scroll naar de ervaring':'Scroll to the experience'}><span>{lang==='nl'?'Scroll verder':'Keep scrolling'}</span><span aria-hidden="true">↓</span></a>
       </section>
@@ -249,8 +256,18 @@ export function LookAgain() {
       </div>
       <Reflection c={c} lang={lang} />
       <Fit c={c} />
-      <section id="work" className="work section"><div className="work-intro"><span className="work-kicker">{c.proof}</span><h2>{c.proofTitle}</h2></div><a className="project-image" href={`https://www.teynuryuseinov.be/${lang}/work/het-fossielenspoor`} target="_blank" rel="noreferrer"><Image src="/fossielenspoor.jpg" alt={c.imageAlt} width={1600} height={1000} sizes="(max-width: 700px) 100vw, 90vw" /><span>{c.project}</span></a><div className="work-details"><h3>{c.proofLead}</h3><div><p>{c.proofBody}</p><p>{c.proofDetail}</p></div></div></section>
-      <section className="contact section"><h2>Teynur<br />Yuseinov<span>.</span></h2><div className="contact-bottom"><p>{c.closingText}</p><a className="text-link" href={`https://www.teynuryuseinov.be/${lang}`} target="_blank" rel="noreferrer">{c.portfolio}</a></div><footer><span>© 2026 Teynur Yuseinov</span><span>{c.footer}</span><a href="#top">{c.top}</a></footer></section>
+    <section id="work" className="closing-work">
+      <motion.a className="closing-project" href={`https://www.teynuryuseinov.be/${lang}/work/het-fossielenspoor`} target="_blank" rel="noreferrer" initial={{opacity:0,scale:.985}} whileInView={{opacity:1,scale:1}} viewport={{once:true,amount:.15}} transition={{duration:1,ease}}>
+        <Image src="/fossielenspoor.jpg" alt={c.imageAlt} width={1600} height={1000} sizes="100vw" />
+        <div className="closing-project-copy"><span>{c.proof}</span><h2>{c.proofTitle}</h2><p>{c.proofLead}</p></div>
+        <span className="closing-project-link">{c.project}<b aria-hidden="true">↗</b></span>
+      </motion.a>
+      <motion.div className="closing-signature" initial={{opacity:0,y:90}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.18}} transition={{duration:1,ease}}>
+        <h2>Teynur<br />Yuseinov<span>.</span></h2>
+        <a className="closing-portfolio" href={`https://www.teynuryuseinov.be/${lang}`} target="_blank" rel="noreferrer"><span>{lang==='nl'?<>Bekijk mijn<br /><strong>volledige portfolio</strong></>:<>View my<br /><strong>full portfolio</strong></>}</span></a>
+        <div className="closing-meta"><span>© 2026 Teynur Yuseinov</span><a href="#top">{c.top} ↑</a></div>
+      </motion.div>
+    </section>
     </main>
   </>;
 }
